@@ -1,0 +1,120 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.android.boilerplate"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        flavorDimensions "default"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        stag {
+            dimension("default")
+            applicationIdSuffix(".staging")
+            buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
+        }
+        dev {
+            dimension("default")
+            applicationIdSuffix(".development")
+            buildConfigField("String", "BASE_URL", "\"https://www.google.com/\"")
+        }
+        prod {
+            dimension("default")
+            buildConfigField("String", "BASE_URL", "\"https://www.google.com/\"")
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // appcompat
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.appcompat_version"
+
+    // constraint layout
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintlayout_version"
+
+    // kotlin and kotlin extensions
+    implementation "androidx.core:core-ktx:$rootProject.ext.kotlin_extension_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.kotlin_version"
+
+    // navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.ext.navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.ext.navigation_version"
+
+    // room: database
+    implementation "androidx.room:room-runtime:$rootProject.ext.room_version"
+    implementation "androidx.room:room-rxjava2:$rootProject.ext.room_version"
+    kapt "androidx.room:room-compiler:$rootProject.ext.room_version"
+
+    // retrofit: network api calling
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttp_version"
+
+    // gson: serialization/deserialization of Java Objects into JSON and back
+    implementation "com.google.code.gson:gson:$rootProject.ext.gson_version"
+
+    // dagger: dependency injection
+    implementation "com.google.dagger:dagger:$rootProject.ext.dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.ext.dagger_version"
+
+    // glide: image loading
+    implementation "com.github.bumptech.glide:glide:$rootProject.ext.glide_version"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.ext.glide_version"
+
+    // rx java and rx android
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxandroid_version"
+
+    // dimens for dynamic layout building
+    implementation "com.intuit.sdp:sdp-android:$rootProject.ext.intuit_version"
+    implementation "com.intuit.ssp:ssp-android:$rootProject.ext.intuit_version"
+
+    // chrome tabs
+    implementation "com.android.support:customtabs:$rootProject.ext.chrome_tabs_version"
+
+    // stetho for accessing database
+    implementation "com.facebook.stetho:stetho:$rootProject.ext.stetho_version"
+}

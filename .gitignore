@@ -1,0 +1,34 @@
+*.iml
+
+# Gradle generated files
+.gradle
+
+# User-specific configurations
+.idea/libraries/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/.name
+.idea/compiler.xml
+.idea/copyright/profiles_settings.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
+
+# Built application files
+app/build
+app/release
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Signing files
+.signing/
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+
+/captures
+.externalNativeBuild

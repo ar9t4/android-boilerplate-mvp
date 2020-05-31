@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="listener"
+            type="com.android.boilerplate.ui.home.HomeFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home"
+            android:textSize="48sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/navigate_to_destination"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->listener.onNavigateToDestinationClicked()}"
+            android:text="@string/navigate_to_destination"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/navigate_with_action"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/navigate_with_action"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{()->listener.onNavigateWithActionClicked()}"
+            app:layout_constraintTop_toBottomOf="@id/navigate_to_destination" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fetch_repos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/fetch_repos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{()->listener.onFetchReposClicked()}"
+            app:layout_constraintTop_toBottomOf="@id/navigate_with_action" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

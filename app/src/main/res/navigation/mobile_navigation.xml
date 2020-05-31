@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/home_dest">
+    <fragment
+        android:id="@+id/home_dest"
+        android:name="com.android.boilerplate.ui.home.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/next_action"
+            app:destination="@id/flow_step_one_dest"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/flow_step_one_dest"
+        android:name="com.android.boilerplate.ui.FlowStepFragment"
+        android:label="@string/step_one"
+        tools:layout="@layout/fragment_flow_step_one" >
+        <action
+            android:id="@+id/next_action"
+            app:destination="@id/flow_step_two_dest"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+        <argument
+            android:name="flow_step_number"
+            app:argType="integer"
+            android:defaultValue="1" />
+    </fragment>
+    <fragment
+        android:id="@+id/flow_step_two_dest"
+        android:name="com.android.boilerplate.ui.FlowStepFragment"
+        android:label="@string/step_two"
+        tools:layout="@layout/fragment_flow_step_two" >
+        <action
+            android:id="@+id/next_action"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popUpTo="@id/home_dest"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+        <argument
+            android:name="flow_step_number"
+            app:argType="integer"
+            android:defaultValue="2" />
+    </fragment>
+    <fragment
+        android:id="@+id/deep_link_dest"
+        android:name="com.android.boilerplate.ui.DeepLinkFragment"
+        android:label="@string/deep_link"
+        tools:layout="@layout/fragment_deep_link">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="www.android.navigation.com/{source}" />
+    </fragment>
+    <fragment
+        android:id="@+id/settings_dest"
+        android:name="com.android.boilerplate.ui.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings" />
+</navigation>
