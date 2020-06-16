@@ -7,6 +7,7 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Bundle
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
@@ -21,6 +22,7 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
 
     private var dialog: Dialog? = null
     private var availableNetwork: Network? = null
+    private var originalSoftInputMode: Int? = null
     private lateinit var inputManager: InputMethodManager
     private lateinit var activityComponent: ActivityComponent
     private lateinit var connectivityManager: ConnectivityManager
@@ -72,6 +74,17 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
         editText.post {
             editText.requestFocus()
             inputManager.showSoftInput(editText.rootView, InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
+
+    override fun setSoftInputMode(mode: Int) {
+        originalSoftInputMode = window.attributes.softInputMode
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+    }
+
+    override fun resetSoftInputMode() {
+        originalSoftInputMode?.let {
+            window.setSoftInputMode(it)
         }
     }
 

@@ -12,6 +12,8 @@ import com.android.boilerplate.R
 
 object DialogUtils {
 
+    private lateinit var dialog: AlertDialog
+
     fun createProgressDialog(context: Context): Dialog {
         val dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -32,6 +34,9 @@ object DialogUtils {
         @StringRes negativeButtonText: Int = -1,
         cancelable: Boolean = true
     ) {
+        if (this::dialog.isInitialized && dialog.isShowing) {
+            return
+        }
         val dialogBuilder = AlertDialog.Builder(context)
         dialogBuilder.apply {
             if (titleId != -1)
@@ -46,7 +51,7 @@ object DialogUtils {
                 setNegativeButton(negativeButtonText, null)
             setCancelable(cancelable)
         }
-        val dialog = dialogBuilder.create()
+        dialog = dialogBuilder.create()
         dialog.show()
         dialog.getButton(DialogInterface.BUTTON_POSITIVE)?.isAllCaps = false
         dialog.getButton(DialogInterface.BUTTON_NEGATIVE)?.isAllCaps = false

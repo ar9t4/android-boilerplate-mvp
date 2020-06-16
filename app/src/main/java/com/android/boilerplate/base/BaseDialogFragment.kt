@@ -2,10 +2,10 @@ package com.android.boilerplate.base
 
 import android.content.Context
 import android.widget.EditText
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.DialogFragment
 import com.android.boilerplate.di.components.ActivityComponent
 
-abstract class BaseFragment : Fragment(),
+abstract class BaseDialogFragment : DialogFragment(),
     MvpView {
 
     private var activity: BaseActivity? = null

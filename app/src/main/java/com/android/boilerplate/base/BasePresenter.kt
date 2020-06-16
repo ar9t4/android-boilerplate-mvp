@@ -23,10 +23,11 @@ open class BasePresenter<V : MvpView> :
         this.mvpView = mvpView
         gson = Gson()
         compositeDisposable = CompositeDisposable()
-        context = if (getMvpView() is BaseFragment)
-            (getMvpView() as BaseFragment).getBaseActivity()!!
-        else
-            getMvpView() as BaseActivity
+        context = when {
+            getMvpView() is BaseFragment -> (getMvpView() as BaseFragment).getBaseActivity()!!
+            getMvpView() is BaseDialogFragment -> (getMvpView() as BaseDialogFragment).getBaseActivity()!!
+            else -> getMvpView() as BaseActivity
+        }
     }
 
     override fun onDetach() {
@@ -81,7 +82,7 @@ open class BasePresenter<V : MvpView> :
                             NetworkError::class.java
                         )
                         // status will be 0 (it is the default value of Int in NetworkError class) when there will be no code sent from server
-                        if (networkError.status == 0) {
+                        if (networkError.status == 0 || networkError.status == 500) {
                             getMvpView()?.showError(context.getString(R.string.facing_difficulties))
                             true
                         } else {
